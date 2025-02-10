@@ -1,0 +1,96 @@
+#include <graphics.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <conio.h>
+#include<math.h>
+void main()
+{ 	    int gd=DETECT,gm;
+	    int x1,x2,x3,y1,y2,y3,nx1,nx2,nx3,ny1,ny2,ny3,c;
+	    int sx,sy,xt,yt,r,shx,shy,maxx,maxy,midx,midy;
+	    float t;
+	    clrscr();
+	    initgraph(&gd,&gm,"c:\\tc\\bgi");
+	    printf("\n\t Program for basic 2D transformations");
+	    printf("\n\t ====================================");
+	    printf("\n Enter the points of rectangle x1,y1,x2,y2:");
+	    setcolor(1);
+	    scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
+	    rectangle(x1,y1,x2,y2);
+	    getch();
+	    do  {
+	    printf("\n 1.Translation\n 2.Rotation\n 3.Scaling\n 4.Shearing\n 5.Refelection\n 6.Exit");
+	    printf("\n Enter your choice(1/2/3/4/5/6):");
+	    scanf("%d",&c);
+	    switch(c)
+	    {			case 1:
+				  printf("\n Enter the translation factor xt,yt:");
+				  scanf("%d%d",&xt,&yt);
+				  nx1=x1+xt;
+				  ny1=y1+yt;
+				  nx2=x2+xt;
+				  ny2=y2+yt;
+				  rectangle(nx1,ny1,nx2,ny2);
+				  getch();
+				  break;
+			case 2:
+				  printf("\n Enter the angle of rotation r:");
+				  scanf("%d",&r);
+				  t=3.14*r/180;
+				  nx1=abs(x1*cos(t)-y1*sin(t));
+				  ny1=abs(x1*sin(t)+y1*cos(t));
+				  nx2=abs(x2*cos(t)-y2*sin(t));
+				  ny2=abs(x2*sin(t)+y2*cos(t));
+				  rectangle(nx1,ny1,nx2,ny2);
+				  getch();
+				  break;
+			case 3:
+				printf("\n Enter the scalling factor sx & sy:");
+				scanf("%d%d",&sx,&sy);
+				nx1=x1*sx;
+				ny1=y1*sy;
+				nx2=x2*sx;
+				ny2=y2*sy;
+				rectangle(nx1,ny1,nx2,ny2);
+				getch();
+				break;
+			case 4:
+				printf("\n Enter the shearing factors shx & shy:");
+				scanf("%d%d",&shx,&shy);
+				printf("\n Shearing along X axis");
+				nx1=x1+shx*y1;
+				ny1=y1;
+				nx2=x2+shx*y2;
+				ny2=y2;
+				rectangle(nx1,ny1,nx2,ny2);
+				getch();
+				printf("\n Shearing along Y axis");
+				nx1=x1;
+				ny1=y1+shy*x1;
+				nx2=x2;
+				ny2=y2+shy*x2;
+				rectangle(nx1,ny1,nx2,ny2);
+				getch();
+				break;
+			case 5:
+				cleardevice();
+				printf("\n Reflection");
+				maxx=getmaxx();
+				maxy=getmaxy();
+				midx=maxx/2;
+				midy=maxy/2;
+				line(midx,0,midx,maxy);
+			      line(0,midy,maxx,midy);
+			      rectangle(400,100,500,200);
+			      printf("\n MIRROR IMAGE");
+			      rectangle(400,300,500,400);
+			      getch();
+			      break;
+			default:
+			      printf("Enter the correct choice:");
+			      }
+			      printf("Do you want to continue(1/0):");
+			      scanf("%d",&c);
+			      }
+			      while(c==1);
+			      closegraph();
+			      }
